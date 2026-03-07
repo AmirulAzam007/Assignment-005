@@ -4,8 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <!-- daisyui + tailwind -->
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    ffdgdfg
+    <section class="navbar">
+
+<div class="navbar bg-base-100 shadow-sm">
+  <div class="flex-1">
+    <div class="flex items-center">
+    <img class="w-10" src="./assets/github-logo.png" alt="">
+    <a class="btn btn-ghost text-xl">GitHub Issues Tracker</a>
+    </div>
+  </div>
+  <div class="flex gap-2">
+    <input type="text" placeholder="Search issues..." class="input input-bordered w-24 md:w-auto" />
+    <button class="btn btn-primary font-bold">+ New Issue</button>
+  </div>
+</div>
+
+    </section>
+
+    <section class="buttons p-5 mt-10 mb-5 w-4/5 flex bg-gray-200 mx-auto rounded-md shadow-lg">
+
+        <div>
+            <button onclick="togglekorbe('allbtn')" id="allbtn" class="btn bg-indigo-700 text-white px-8">All</button>
+            <button onclick="togglekorbe('openbtn')" id="openbtn" class="btn bg-gray-100 px-6">Open</button>
+            <button onclick="togglekorbe('closebtn')" id="closebtn" class="btn bg-gray-100 px-6">Closed</button>
+        </div>
+
+    </section>
+
+    <section class="cardbox p-5 w-4/5 bg-gray-200 mx-auto shadow-lg">
+
+      <div class="cardfirst flex justify-between">
+        <div class="flex gap-2 items-center">
+          <div class="img">
+          <img src="./assets/Aperture.png" alt="">
+        </div>
+        <div>
+          <p class="font-bold text-lg">50 Issues</p>
+          <p>Track and manage your project issues</p>
+        </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+          <p>Open</p>
+          <div class="w-3 h-3 bg-[#A855F7] rounded-full"></div>
+          <p>Close</p>
+        </div>
+
+      </div>
+
+      <hr class="my-10 border-gray-300 w-full" />
+
+      <div class="cards">
+
+        <div class="card">
+          
+          <!-- div 1 -->
+           <div>
+             <img src="./assets/Open-Status.png" alt="">
+           </div>
+        </div>
+      </div>
+
+    </section>
+
+    <script src="home.js"></script>
 </body>
 </html>
