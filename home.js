@@ -1,4 +1,6 @@
 
+let alldata = [];
+
 const createElements =  (arr) => {
   const elements = arr.map((el) => `<span class="badge badge-soft badge-secondary uppercase">${el}</span>`);
 
@@ -55,16 +57,95 @@ const data = await res.json();
 
 hideloading();
 
-displaydatas(data.data);
+alldata =  data.data;
+
+displaydatas(alldata);
+
+
  }
 
   loaddatas();
 
+
+function statuscheck(status){
+
+    if(status==="all")
+    {
+        displaydatas(alldata);
+        return;
+    }
+
+    const filterdata = alldata.filter(issue => issue.status===status);
+
+    displaydatas(filterdata);
+}
+
+
+const LoadWordDetail = async (id) => {
+
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+
+    const abc = await fetch(url);
+
+    const detail = await abc.json();
+
+    DisplayWordDetail(detail.data);
+
+    my_modal_5.showModal();
+
+}
+
+const DisplayWordDetail = (detail) => {
+
+    const detailContainer = document.getElementById("detailContainer");
+
+    detailContainer.innerHTML = `
+    <h1 class="font-bold text-2xl">${detail.title}</h1>
+
+    <div class="flex items-center space-x-3">
+      <div class="badge badge-soft badge-secondary">${detail.status}</div>
+      <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+      <p class="text-gray-400">Opened by ${detail.author}</p>
+      <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+      <p class="text-gray-400">${new Date(detail.createdAt).toLocaleDateString()}</p>
+    </div>
+
+    <div class="pt-2 pb-2">
+      <div class="">${createElements(detail.labels)}</div>
+    </div>
+
+    <p class="font-semibold text-gray-400 pb-2">${detail.description}</p>
+
+    <div class="bg-gray-200 flex items-center p-4 rounded-md">
+      
+      <div>
+        <p class="text-gray-400">assignee:</p>
+        <p class="font-bold">${detail.assignee}</p>
+      </div>
+
+      <div class="mx-auto">
+        <p class="text-gray-400">priority:</p>
+        <div class="badge badge-soft badge-secondary">${detail.priority}</div>
+      </div>
+    </div>
+    `
+
+}
+
+
 function displaydatas(data){
+
+
+    cardcontainer.innerHTML ="";
 
     data.forEach(info => {
         
         const card = document.createElement("div");
+
+        card.onclick = function(){
+
+            LoadWordDetail(info.id);
+        }
 
         card.className = "card rounded-xl bg-white shadow-lg m-2 p-4 space-y-3";
 
@@ -124,6 +205,24 @@ function displaydatas(data){
     });
 
 }
+
+document.getElementById("btnSearch").addEventListener("click", async () => {
+
+    const input = document.getElementById("inputSearch");
+    const searchvalue = input.value.trim().toLowerCase();
+
+    const search = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchvalue}`;
+
+    const searched = await fetch(search);
+
+    const searchdetail = await searched.json();
+
+    const finalsearch = searchdetail.data;
+    
+
+
+
+})
 
 //           <div class="badge badge-soft badge-secondary">${}</div>
             //   <div class="badge badge-soft badge-secondary">Secondary</div>
