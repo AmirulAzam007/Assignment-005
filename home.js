@@ -1,8 +1,35 @@
 
 let alldata = [];
 
-const createElements =  (arr) => {
-  const elements = arr.map((el) => `<span class="badge badge-soft p-3 ${badgecolors(el)} uppercase">${el}</span>`);
+// const createElements =  (arr) => {
+//   const elements = arr.map((el) => `<span class="badge badge-soft p-3 ${badgecolors(el)} uppercase">${el}</span>`);
+
+//   return elements.join(" ");
+// };
+
+
+const createElements = (arr) => {
+  const elements = arr.map((el) => {
+    
+    let icon = "";
+    if(el.toLowerCase() === "bug") {
+      icon = '<i class="fa-solid fa-bug"></i>';
+    } else if(el.toLowerCase() === "help wanted") {
+      icon = '<i class="fa-solid fa-life-ring"></i>';
+    } else if(el.toLowerCase() === "enhancement") {
+      icon = '<i class="fa-solid fa-star-half-stroke"></i>';
+    }
+    else if(el.toLowerCase() === "documentation") {
+      icon = '<i class="fa-solid fa-certificate"></i>';
+    }
+    else if(el.toLowerCase() === "good first issue") {
+      icon = '<i class="fa-brands fa-jira"></i>';
+    }
+
+    return `<span class="badge badge-soft p-3 ${badgecolors(el)} uppercase">
+              ${icon} ${el}
+            </span>`;
+  });
 
   return elements.join(" ");
 };
@@ -205,7 +232,7 @@ function displaydatas(data){
             </div>
 
             <!-- div 3 -->
-             <div class="">${createElements(info.labels)}</div>
+             <div class=""> ${createElements(info.labels)}</div>
 
              <hr class=" border-gray-300 w-full pb-1" />
 
