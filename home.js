@@ -2,10 +2,41 @@
 let alldata = [];
 
 const createElements =  (arr) => {
-  const elements = arr.map((el) => `<span class="badge badge-soft badge-secondary uppercase">${el}</span>`);
+  const elements = arr.map((el) => `<span class="badge badge-soft p-3 ${badgecolors(el)} uppercase">${el}</span>`);
 
   return elements.join(" ");
 };
+
+
+function badgecolors(prio) {
+    
+    if(prio==="high" || prio==="bug")
+    {
+        return "bg-red-100 text-red-700";
+    }
+    else if(prio==="medium" || prio==="help wanted")
+    {
+        return "bg-yellow-100 text-yellow-700";
+    }
+    else if(prio==="enhancement" || prio==="good first issue")
+    {
+        return "bg-green-100 text-green-700";
+    }
+    else if(prio==="documentation")
+    {
+        return "bg-blue-100 text-blue-700";
+    }
+    else if(prio==="open")
+    {
+        return "bg-green-700 text-white";
+    }
+    else if(prio==="closed")
+    {
+        return "bg-red-700 text-white";
+    }
+
+}
+
 
  const allbtn = document.getElementById("allbtn");
  const openbtn = document.getElementById("openbtn");
@@ -103,7 +134,7 @@ const DisplayWordDetail = (detail) => {
     <h1 class="font-bold text-2xl">${detail.title}</h1>
 
     <div class="flex items-center space-x-3">
-      <div class="badge badge-soft badge-secondary">${detail.status}</div>
+      <div class="badge badge-soft ${badgecolors(detail.status)} p-3 uppercase ">${detail.status}</div>
       <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
       <p class="text-gray-400">Opened by ${detail.author}</p>
       <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
@@ -125,7 +156,7 @@ const DisplayWordDetail = (detail) => {
 
       <div class="mx-auto">
         <p class="text-gray-400">priority:</p>
-        <div class="badge badge-soft badge-secondary">${detail.priority}</div>
+        <div class="badge badge-soft p-3 ${badgecolors(detail.priority)} uppercase ">${detail.priority}</div>
       </div>
     </div>
     `
@@ -163,8 +194,8 @@ function displaydatas(data){
           
           <!-- div 1 -->
            <div class="flex justify-between">
-             <img src="./assets/Open-Status.png" alt="">
-             <div class="badge badge-soft badge-secondary uppercase">${info.priority}</div>
+             <img src="./assets/${info.status}-Status.png" alt="">
+             <div class="badge badge-soft p-3 ${badgecolors(info.priority)} uppercase">${info.priority}</div>
            </div>
 
            <!-- div 2 -->
