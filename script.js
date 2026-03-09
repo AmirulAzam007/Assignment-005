@@ -9,7 +9,7 @@ document.getElementById("lgn-btn").addEventListener("click", function(){
     if(username=="admin" && password=="admin123")
     {
 
-        window.location.assign("/home.html");
+        window.location.assign("home.html");
     }
     else
     {
