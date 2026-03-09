@@ -202,11 +202,22 @@ function displaydatas(data){
         `;
 
         cardcontainer.appendChild(card);
+
+
+
     });
+
+    alltotal.innerText = cardcontainer.children.length;
 
 }
 
+const as = cardcontainer.children.length;
+
+    console.log(as);
+
 document.getElementById("btnSearch").addEventListener("click", async () => {
+
+    //alltotal.innerText = cardcontainer.children.length;
 
     const input = document.getElementById("inputSearch");
     const searchvalue = input.value.trim().toLowerCase();
@@ -218,11 +229,19 @@ document.getElementById("btnSearch").addEventListener("click", async () => {
     const searchdetail = await searched.json();
 
     const finalsearch = searchdetail.data;
-    
+
+
+
+    displaydatas(finalsearch);
+
 
 
 
 })
+
+
+const alltotal = document.getElementById("alltotal");
+
 
 //           <div class="badge badge-soft badge-secondary">${}</div>
             //   <div class="badge badge-soft badge-secondary">Secondary</div>
